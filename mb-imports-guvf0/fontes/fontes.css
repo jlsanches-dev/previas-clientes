@@ -1,0 +1,14 @@
+/* Fonte hospedada no próprio site (sem chamar o Google a cada visita).
+   Roboto Flex, versão variável: um arquivo só com todos os pesos (100 a 1000)
+   e larguras (25% a 151%). É da mesma família do "IMPORTS" do logo da MB.
+   Licença SIL Open Font License 1.1 (uso livre), veja OFL-roboto-flex.txt.
+   Só o conjunto "latin", que já cobre todos os acentos do português. */
+
+@font-face {
+  font-family: "Roboto Flex";
+  font-style: normal;
+  font-weight: 100 1000;
+  font-stretch: 25% 151%;
+  font-display: swap;
+  src: url(roboto-flex-var.woff2) format("woff2");
+}
