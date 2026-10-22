@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Segurança: o navegador só aceita arquivos do próprio site e o banco da agenda (Supabase). -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src https://*.supabase.co; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Painel | FB Barbearia</title>
+  <meta name="theme-color" content="#0c0b09">
+  <link rel="stylesheet" href="fontes/fontes.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/painel.css">
+</head>
+<body class="pagina-painel">
+  <!-- PRÉVIA: faixa que avisa que não é o site oficial. -->
+  <p class="faixa-previa" role="note">Prévia para apresentar à barbearia. Não é o site oficial.</p>
+  <p class="faixa-teste" role="note" data-faixa-teste hidden>Painel em modo de teste: sem senha, com clientes de exemplo. Nada aqui é de verdade.</p>
+
+  <!-- Entrar (só no modo de verdade) -->
+  <main class="entrar" data-entrar hidden>
+    <img src="img/logo-fb.webp" alt="" width="200" height="200">
+    <h1>Painel da FB</h1>
+    <form data-form-entrar novalidate>
+      <div class="campo">
+        <label for="entrar-email">E-mail</label>
+        <input id="entrar-email" type="email" autocomplete="username" required>
+      </div>
+      <div class="campo">
+        <label for="entrar-senha">Senha</label>
+        <input id="entrar-senha" type="password" autocomplete="current-password" required>
+      </div>
+      <p class="erro" data-erro-entrar aria-live="polite"></p>
+      <button type="submit" class="botao botao-principal">Entrar</button>
+    </form>
+  </main>
+
+  <!-- O painel -->
+  <div data-painel hidden>
+    <header class="nav">
+      <span class="nav-marca"><img src="img/logo-fb.webp" alt="" width="200" height="200"><span>Painel</span></span>
+      <div class="painel-conta">
+        <span class="painel-email" data-email></span>
+        <button type="button" class="botao-texto" data-sair>Sair</button>
+      </div>
+    </header>
+
+    <main class="painel">
+      <div class="dia-barra">
+        <button type="button" class="seta" data-dia-mudar="-1" aria-label="Dia anterior">‹</button>
+        <h1 class="dia-titulo" data-dia-titulo aria-live="polite"></h1>
+        <button type="button" class="seta" data-dia-mudar="1" aria-label="Próximo dia">›</button>
+      </div>
+      <div class="dia-extra">
+        <button type="button" class="botao-texto" data-dia-hoje>Hoje</button>
+        <label class="so-leitor" for="dia-escolher">Escolher o dia</label>
+        <input id="dia-escolher" type="date" data-dia-escolher>
+      </div>
+
+      <fieldset class="filtro" data-filtro>
+        <legend class="so-leitor">Mostrar a agenda de</legend>
+      </fieldset>
+
+      <p class="dia-resumo" data-dia-resumo></p>
+
+      <div class="painel-acoes">
+        <button type="button" class="botao botao-principal" data-abrir="marcar">Marcar cliente</button>
+        <button type="button" class="botao botao-contorno" data-abrir="bloquear">Bloquear horário</button>
+      </div>
+
+      <!-- Marcar um cliente (balcão, WhatsApp, telefone) -->
+      <form class="caixa-form" data-form="marcar" novalidate hidden>
+        <h2>Marcar cliente</h2>
+        <fieldset class="campo">
+          <legend>Serviços</legend>
+          <div class="checks" data-marcar-servicos></div>
+        </fieldset>
+        <div class="campos-linha">
+          <div class="campo">
+            <label for="marcar-barbeiro">Barbeiro</label>
+            <select id="marcar-barbeiro" data-marcar-barbeiro></select>
+          </div>
+          <div class="campo">
+            <label for="marcar-dia">Dia</label>
+            <input id="marcar-dia" type="date" data-marcar-dia>
+          </div>
+          <div class="campo">
+            <label for="marcar-hora">Horário livre</label>
+            <select id="marcar-hora" data-marcar-hora></select>
+          </div>
+        </div>
+        <div class="campos-linha">
+          <div class="campo">
+            <label for="marcar-nome">Nome do cliente</label>
+            <input id="marcar-nome" type="text" maxlength="60" autocomplete="off">
+          </div>
+          <div class="campo">
+            <label for="marcar-whats">WhatsApp (opcional)</label>
+            <input id="marcar-whats" type="tel" inputmode="tel" maxlength="16" autocomplete="off" placeholder="(11) 91234-5678">
+          </div>
+        </div>
+        <p class="erro" data-erro-form aria-live="polite"></p>
+        <div class="form-botoes">
+          <button type="submit" class="botao botao-principal">Marcar</button>
+          <button type="button" class="botao botao-texto" data-fechar>Fechar</button>
+        </div>
+      </form>
+
+      <!-- Bloquear um horário (almoço, folga, compromisso) -->
+      <form class="caixa-form" data-form="bloquear" novalidate hidden>
+        <h2>Bloquear horário</h2>
+        <div class="campos-linha">
+          <div class="campo">
+            <label for="bloq-barbeiro">De quem</label>
+            <select id="bloq-barbeiro" data-bloq-barbeiro></select>
+          </div>
+          <div class="campo">
+            <label for="bloq-dia">Dia</label>
+            <input id="bloq-dia" type="date" data-bloq-dia>
+          </div>
+        </div>
+        <label class="check-linha"><input type="checkbox" data-bloq-inteiro> O dia inteiro</label>
+        <div class="campos-linha" data-bloq-horas>
+          <div class="campo">
+            <label for="bloq-inicio">Das</label>
+            <input id="bloq-inicio" type="time" step="900" value="12:00" data-bloq-inicio>
+          </div>
+          <div class="campo">
+            <label for="bloq-fim">Até</label>
+            <input id="bloq-fim" type="time" step="900" value="13:00" data-bloq-fim>
+          </div>
+        </div>
+        <div class="campo">
+          <label for="bloq-motivo">Motivo (só vocês veem)</label>
+          <input id="bloq-motivo" type="text" maxlength="60" placeholder="Almoço, folga, médico..." autocomplete="off">
+        </div>
+        <p class="erro" data-erro-form aria-live="polite"></p>
+        <div class="form-botoes">
+          <button type="submit" class="botao botao-principal">Bloquear</button>
+          <button type="button" class="botao botao-texto" data-fechar>Fechar</button>
+        </div>
+      </form>
+
+      <p class="aviso-painel" data-aviso aria-live="polite"></p>
+      <ol class="lista-dia" data-lista aria-label="Horários do dia"></ol>
+
+      <p class="painel-rodape">
+        <a href="agenda.html" target="_blank" rel="noopener">Abrir a agenda dos clientes</a>
+        <button type="button" class="botao-texto" data-apagar-teste hidden>Apagar dados de teste</button>
+      </p>
+    </main>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="js/regras.js"></script>
+  <script src="js/servidor.js"></script>
+  <script src="js/painel.js"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+/* Painel do barbeiro (painel.html). Mesmas cores e letras do site,
+   pensado para usar no celular, entre um cliente e outro. */
+
+.painel { max-width: 860px; margin: 0 auto; padding: 20px var(--margem) 80px; }
+
+/* Entrar */
+.entrar { max-width: 380px; margin: 0 auto; padding: 56px var(--margem); }
+.entrar img { width: 72px; height: 72px; border-radius: 50%; margin-bottom: 16px; }
+.entrar h1 { font-size: 2.2rem; margin-bottom: 24px; }
+.entrar .botao { width: 100%; }
+.entrar .erro { margin: 0 0 12px; }
+
+.painel-conta { display: flex; align-items: center; gap: 14px; }
+.painel-email { font-size: .88rem; color: var(--texto-suave); max-width: 40vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Dia escolhido */
+.dia-barra { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 10px; }
+.dia-titulo { font-size: clamp(1.35rem, 5.5vw, 2rem); line-height: 1.1; text-align: center; }
+.seta {
+  width: 46px; height: 46px; display: grid; place-items: center;
+  background: none; border: 1px solid var(--linha); border-radius: var(--canto);
+  color: var(--texto); font-size: 1.6rem; line-height: 1; cursor: pointer;
+}
+.seta:hover { border-color: var(--texto); }
+.dia-extra { display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 6px; }
+.dia-extra input {
+  height: 40px; padding: 0 10px; background: var(--superficie); color: var(--texto);
+  border: 1px solid var(--linha); border-radius: var(--canto); font: inherit; font-size: .95rem; color-scheme: dark;
+}
+
+/* Filtro por barbeiro */
+.filtro { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.filtro-opcao { position: relative; cursor: pointer; }
+.filtro-opcao input { position: absolute; opacity: 0; pointer-events: none; }
+.filtro-opcao span { display: block; padding: 8px 14px; border: 1px solid var(--linha); border-radius: var(--canto); font-weight: 600; font-size: .95rem; }
+.filtro-opcao:has(input:checked) span { background: var(--ouro); border-color: var(--ouro); color: var(--sobre-ouro); }
+.filtro-opcao:has(input:focus-visible) { outline: 2px solid var(--ouro); outline-offset: 3px; }
+
+.dia-resumo { margin: 16px 0 0; color: var(--texto-suave); }
+.painel-acoes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+.aviso-painel { min-height: 1.5em; margin: 14px 0 0; color: var(--ouro); }
+
+/* Formulários (marcar cliente, bloquear) */
+.caixa-form { margin-top: 18px; padding: 20px 18px; background: var(--superficie); border: 1px solid var(--linha); border-radius: var(--canto); }
+.caixa-form h2 { font-size: 1.4rem; margin-bottom: 14px; }
+.caixa-form .campo { max-width: none; }
+.caixa-form fieldset.campo { border: 0; padding: 0; margin: 0 0 16px; }
+.caixa-form legend { font-size: .95rem; margin-bottom: 6px; }
+.caixa-form select, .caixa-form input[type="date"], .caixa-form input[type="time"] {
+  height: 52px; padding: 0 12px; background: var(--fundo); color: var(--texto);
+  border: 1px solid var(--linha); border-radius: var(--canto); font: 400 1.02rem var(--fonte-texto); color-scheme: dark;
+}
+.caixa-form .campo input[type="text"], .caixa-form .campo input[type="tel"] { background: var(--fundo); }
+.campos-linha { display: grid; gap: 0 12px; }
+.checks { display: grid; gap: 2px; }
+.check-linha { display: flex; align-items: center; gap: 10px; min-height: 40px; cursor: pointer; }
+.check-linha input { width: 20px; height: 20px; accent-color: var(--ouro); }
+.form-botoes { display: flex; align-items: center; gap: 18px; margin-top: 4px; }
+.caixa-form .erro { margin: 0 0 12px; }
+
+/* A lista do dia */
+.lista-dia { list-style: none; margin: 8px 0 0; padding: 0; border-top: 1px solid var(--linha); }
+.item { display: grid; grid-template-columns: 6.6em 1fr; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--linha); }
+.item-hora { margin: 0; font-family: var(--fonte-titulo); font-weight: 700; font-size: 1.05rem; line-height: 1.3; font-variant-numeric: tabular-nums; }
+.item-corpo { min-width: 0; }
+.item-nome { margin: 0; font-weight: 600; font-size: 1.08rem; }
+.item-detalhe { margin: 2px 0 0; color: var(--texto-suave); font-size: .93rem; }
+.item-status { display: inline-block; margin: 6px 0 0; padding: 2px 8px; border: 1px solid var(--linha); border-radius: var(--canto); font-size: .82rem; color: var(--texto-suave); }
+.item-acoes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.item-botao {
+  display: inline-flex; align-items: center; min-height: 38px; padding: 0 12px;
+  background: none; border: 1px solid var(--linha); border-radius: var(--canto);
+  color: var(--texto); font: 600 .9rem var(--fonte-texto); text-decoration: none; cursor: pointer;
+}
+.item-botao:hover { border-color: var(--texto); }
+.item-botao.perigo { color: var(--erro); border-color: rgba(242, 164, 154, .4); }
+.item-cancelado .item-hora, .item-cancelado .item-nome { color: var(--texto-suave); text-decoration: line-through; }
+.item-faltou .item-nome { color: var(--texto-suave); }
+.item-bloqueio { background: repeating-linear-gradient(-45deg, transparent 0 10px, rgba(243, 238, 226, .03) 10px 20px); }
+.item-bloqueio .item-nome { color: var(--texto-suave); }
+
+.painel-rodape { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: 32px; font-size: .93rem; }
+.painel-rodape a { color: var(--texto-suave); text-underline-offset: 4px; }
+
+@media (min-width: 600px) {
+  .campos-linha { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .painel-acoes { display: flex; }
+  .item { grid-template-columns: 8em 1fr; }
+}

@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Segurança: o navegador só aceita arquivos do próprio site e o banco da agenda (Supabase),
+       que a página usa para mostrar o próximo horário livre. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src https://*.supabase.co; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <!-- EM CONSTRUÇÃO: não aparece no Google. -->
+  <meta name="robots" content="noindex, nofollow">
+  <!-- TROCAR quando tiver o endereço: título e descrição com o bairro -->
+  <title>FB Barbearia | Barbearia com hora marcada em Jundiaí</title>
+  <meta name="description" content="Corte, barba e sobrancelha com Fernando e Diego, desde 2017. Marque seu horário pelo site, sem cadastro.">
+  <meta name="theme-color" content="#0c0b09">
+  <link rel="preload" href="fontes/zilla-slab-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="fontes/fontes.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- PRÉVIA: faixa que avisa que não é o site oficial. -->
+  <p class="faixa-previa" role="note">Prévia para apresentar à barbearia. Não é o site oficial.</p>
+  <p class="faixa-teste" role="note">Rascunho: as caixas tracejadas são fotos que faltam, e a agenda está em modo de teste.</p>
+  <a class="pular" href="#quem-atende">Pular para o conteúdo</a>
+
+  <header class="nav">
+    <a class="nav-marca" href="#topo"><img src="img/logo-fb.webp" alt="" width="200" height="200"><span>FB Barbearia</span></a>
+    <nav class="nav-links" aria-label="Seções">
+      <a href="#quem-atende">Quem atende</a>
+      <a href="#trabalhos">Trabalhos</a>
+      <a href="#duvidas">Dúvidas</a>
+      <a href="#onde-fica">Onde fica</a>
+    </nav>
+    <!-- A agenda abre em outra aba -->
+    <a class="botao botao-principal nav-botao" href="agenda.html" target="_blank" rel="noopener">Marcar horário</a>
+  </header>
+
+  <main>
+    <!-- Topo: foto real e a "senha" com o próximo horário livre -->
+    <section id="topo" class="capa" aria-labelledby="titulo-site">
+      <div class="foto-vazia capa-foto"><span>Foto real: Fernando cortando, com a cadeira e o espelho</span></div>
+      <div class="capa-texto">
+        <p class="capa-desde">Desde 2017</p>
+        <h1 id="titulo-site">FB Barbearia</h1>
+        <p class="capa-frase">Corte, barba e sobrancelha com hora marcada, em Jundiaí.</p>
+
+        <div class="senha" data-senha hidden>
+          <div class="senha-topo">
+            <p class="senha-rotulo">Próximo horário livre</p>
+            <p class="senha-hora"><span class="senha-dia" data-senha-dia></span> <span data-senha-hora></span></p>
+            <p class="senha-detalhe" data-senha-detalhe></p>
+          </div>
+          <div class="senha-corte" aria-hidden="true"></div>
+          <div class="senha-baixo">
+            <a class="botao botao-principal" href="agenda.html" target="_blank" rel="noopener" data-senha-marcar>Marcar horário</a>
+            <a class="senha-outros" href="agenda.html" target="_blank" rel="noopener">Ver outros horários</a>
+          </div>
+        </div>
+        <a class="botao botao-principal capa-marcar" href="agenda.html" target="_blank" rel="noopener" data-sem-senha>Marcar horário</a>
+        <p class="status" data-status aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section id="quem-atende" class="secao equipe" aria-labelledby="titulo-equipe">
+      <h2 id="titulo-equipe" class="titulo-secao">Quem atende</h2>
+      <div class="barbeiros">
+        <article class="barbeiro">
+          <div class="foto-vazia barbeiro-foto"><span>Foto do Fernando</span></div>
+          <h3>Fernando</h3>
+          <p>Uma frase sobre ele, com a especialidade (a confirmar).</p>
+          <a class="botao-texto" href="agenda.html?barbeiro=fernando" target="_blank" rel="noopener">Marcar com o Fernando</a>
+        </article>
+        <article class="barbeiro">
+          <div class="foto-vazia barbeiro-foto"><span>Foto do Diego</span></div>
+          <h3>Diego</h3>
+          <p>Uma frase sobre ele, com a especialidade (a confirmar).</p>
+          <a class="botao-texto" href="agenda.html?barbeiro=diego" target="_blank" rel="noopener">Marcar com o Diego</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="trabalhos" class="secao" aria-labelledby="titulo-trabalhos">
+      <h2 id="titulo-trabalhos" class="titulo-secao">Trabalhos</h2>
+      <ul class="trabalhos" aria-label="Fotos de cortes. Deslize para ver mais.">
+        <li class="foto-vazia"><span>Degradê</span></li>
+        <li class="foto-vazia"><span>Barba</span></li>
+        <li class="foto-vazia"><span>Desenho na navalha</span></li>
+        <li class="foto-vazia"><span>Corte social</span></li>
+        <li class="foto-vazia"><span>Sobrancelha</span></li>
+        <li class="foto-vazia"><span>O espaço</span></li>
+      </ul>
+    </section>
+
+    <section id="duvidas" class="secao duvidas" aria-labelledby="titulo-duvidas">
+      <h2 id="titulo-duvidas" class="titulo-secao">Dúvidas</h2>
+      <div class="duvidas-lista">
+        <details>
+          <summary>Como marco um horário?</summary>
+          <p>Pelo botão "Marcar horário": escolha o serviço, o barbeiro e um horário livre. Não precisa de cadastro nem senha.</p>
+        </details>
+        <details>
+          <summary>Dá para ir sem marcar?</summary>
+          <p>Resposta a confirmar com o Fernando.</p>
+        </details>
+        <details>
+          <summary>Como troco ou cancelo o horário?</summary>
+          <p>Depois de marcar, a agenda mostra o link "Ver ou cancelar este horário". Ele também fica guardado no seu celular, em "Seus horários", no topo da agenda.</p>
+        </details>
+        <details>
+          <summary>Quais formas de pagamento?</summary>
+          <p>Resposta a confirmar com o Fernando.</p>
+        </details>
+      </div>
+    </section>
+
+    <section id="onde-fica" class="secao onde" aria-labelledby="titulo-onde">
+      <div class="onde-texto">
+        <h2 id="titulo-onde" class="titulo-secao">Onde fica</h2>
+        <address class="endereco">Endereço a confirmar com o Fernando</address>
+        <table class="horarios" data-horarios>
+          <caption class="so-leitor">Horários de atendimento</caption>
+        </table>
+        <p class="horarios-nota">Horários de exemplo, a confirmar.</p>
+      </div>
+      <div class="foto-vazia mapa"><span>Mapa do Google (entra quando tiver o endereço)</span></div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <img src="img/logo-fb.webp" alt="" width="200" height="200">
+    <p class="rodape-nome">FB Barbearia, desde 2017</p>
+    <p class="rodape-links">
+      <a href="agenda.html" target="_blank" rel="noopener">Agenda</a>
+      <a href="https://instagram.com/fer._barber" target="_blank" rel="noopener noreferrer">Instagram @fer._barber</a>
+    </p>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="js/regras.js"></script>
+  <script src="js/servidor.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Segurança: o navegador só aceita arquivos do próprio site e o banco da agenda (Supabase). -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src https://*.supabase.co; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+  <meta name="referrer" content="no-referrer">
+  <!-- A agenda não aparece no Google (quem acha o site pelo Google entra pela página inicial). -->
+  <meta name="robots" content="noindex, nofollow">
+  <title>Agenda | FB Barbearia</title>
+  <meta name="description" content="Marque seu horário na FB Barbearia, sem cadastro.">
+  <meta name="theme-color" content="#0c0b09">
+  <link rel="preload" href="fontes/zilla-slab-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="fontes/fontes.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="pagina-agenda">
+  <!-- PRÉVIA: faixa que avisa que não é o site oficial. -->
+  <p class="faixa-previa" role="note">Prévia para apresentar à barbearia. Não é o site oficial.</p>
+  <p class="faixa-teste" role="note" data-faixa-teste hidden>Agenda em modo de teste: os clientes são de exemplo e nada vai para a barbearia.</p>
+
+  <header class="nav">
+    <a class="nav-marca" href="index.html"><img src="img/logo-fb.webp" alt="" width="200" height="200"><span>FB Barbearia</span></a>
+    <a class="nav-voltar" href="index.html">Ver o site</a>
+  </header>
+
+  <main id="agenda" class="agenda" aria-labelledby="titulo-agenda">
+    <div class="agenda-topo">
+      <h1 id="titulo-agenda" class="titulo-secao">Marque seu horário</h1>
+      <p class="agenda-intro">Sem cadastro e sem senha. Escolha o serviço, o barbeiro e um horário livre.</p>
+    </div>
+
+    <noscript>
+      <p class="sem-js">A agenda precisa do JavaScript ligado no navegador.</p>
+    </noscript>
+    <p class="carregando" data-carregando role="status">Carregando os horários…</p>
+
+    <!-- Horários marcados neste aparelho -->
+    <section class="meus" data-meus aria-labelledby="titulo-meus" hidden>
+      <h2 id="titulo-meus">Seus horários</h2>
+      <ul></ul>
+    </section>
+
+    <form class="agenda-form" data-agenda novalidate hidden>
+      <div class="passos">
+        <section class="passo" data-passo="servicos" aria-labelledby="passo-1">
+          <div class="passo-topo">
+            <span class="passo-num" aria-hidden="true">1</span>
+            <h2 id="passo-1" tabindex="-1">Serviço</h2>
+            <p class="passo-escolha" data-escolha></p>
+            <button type="button" class="passo-trocar" data-trocar aria-label="Trocar serviço" hidden>Trocar</button>
+          </div>
+          <div class="passo-corpo" data-corpo hidden></div>
+        </section>
+
+        <section class="passo" data-passo="barbeiro" aria-labelledby="passo-2">
+          <div class="passo-topo">
+            <span class="passo-num" aria-hidden="true">2</span>
+            <h2 id="passo-2" tabindex="-1">Barbeiro</h2>
+            <p class="passo-escolha" data-escolha></p>
+            <button type="button" class="passo-trocar" data-trocar aria-label="Trocar barbeiro" hidden>Trocar</button>
+          </div>
+          <div class="passo-corpo" data-corpo hidden></div>
+        </section>
+
+        <section class="passo" data-passo="horario" aria-labelledby="passo-3">
+          <div class="passo-topo">
+            <span class="passo-num" aria-hidden="true">3</span>
+            <h2 id="passo-3" tabindex="-1">Dia e horário</h2>
+            <p class="passo-escolha" data-escolha></p>
+            <button type="button" class="passo-trocar" data-trocar aria-label="Trocar dia e horário" hidden>Trocar</button>
+          </div>
+          <div class="passo-corpo" data-corpo hidden></div>
+        </section>
+
+        <section class="passo" data-passo="dados" aria-labelledby="passo-4">
+          <div class="passo-topo">
+            <span class="passo-num" aria-hidden="true">4</span>
+            <h2 id="passo-4" tabindex="-1">Seus dados</h2>
+          </div>
+          <div class="passo-corpo" data-corpo hidden>
+            <div class="campo">
+              <label for="agenda-nome">Seu nome</label>
+              <input id="agenda-nome" name="nome" type="text" autocomplete="name" maxlength="60" required>
+            </div>
+            <div class="campo">
+              <label for="agenda-whats">WhatsApp com DDD</label>
+              <input id="agenda-whats" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel-national" maxlength="16" placeholder="(11) 91234-5678" required>
+            </div>
+            <!-- Isca para robôs de spam: pessoas não veem este campo. Se vier preenchido, a marcação é ignorada. -->
+            <div class="isca" aria-hidden="true">
+              <label for="agenda-site">Não preencha</label>
+              <input id="agenda-site" name="site" type="text" tabindex="-1" autocomplete="off">
+            </div>
+            <p class="privacidade">Seu nome e WhatsApp ficam só na agenda da FB, para o barbeiro saber quem vem e falar com você se precisar. Eles são apagados 30 dias depois do atendimento.</p>
+          </div>
+        </section>
+      </div>
+
+      <div class="resumo" data-resumo>
+        <dl class="resumo-lista">
+          <div><dt>Serviço</dt><dd data-resumo-servicos>Nenhum ainda</dd></div>
+          <div><dt>Barbeiro</dt><dd data-resumo-barbeiro>A escolher</dd></div>
+          <div><dt>Quando</dt><dd data-resumo-quando>A escolher</dd></div>
+        </dl>
+        <p class="resumo-total"><span data-total-preco></span><span class="resumo-tempo" data-total-tempo>Nenhum serviço ainda</span></p>
+        <p class="erro" data-erro aria-live="polite"></p>
+        <button type="submit" class="botao botao-principal" data-acao>Continuar</button>
+      </div>
+    </form>
+
+    <!-- Depois de marcar -->
+    <div class="feito" data-feito tabindex="-1" hidden>
+      <h2>Horário marcado</h2>
+      <p class="feito-quando" data-feito-quando></p>
+      <p class="feito-detalhe" data-feito-detalhe></p>
+      <p class="feito-teste" data-feito-teste hidden>Modo de teste: nada foi enviado à barbearia.</p>
+      <div class="feito-acoes">
+        <button type="button" class="botao botao-principal" data-salvar>Salvar na agenda do celular</button>
+        <a class="botao botao-contorno" href="#" data-link-horario hidden>Ver ou cancelar este horário</a>
+        <a class="botao botao-contorno" href="#" data-avisar target="_blank" rel="noopener noreferrer" hidden>Avisar no WhatsApp</a>
+        <button type="button" class="botao botao-texto" data-novo>Marcar outro horário</button>
+      </div>
+      <p class="feito-nota">O horário fica guardado neste aparelho, em "Seus horários", no topo da agenda.</p>
+    </div>
+
+    <!-- Ver ou cancelar (link #t=...) -->
+    <div class="feito seu" data-seu tabindex="-1" hidden>
+      <h2>Seu horário</h2>
+      <p class="feito-quando" data-seu-quando></p>
+      <p class="feito-detalhe" data-seu-detalhe></p>
+      <p class="seu-situacao" data-seu-situacao aria-live="polite"></p>
+      <div class="feito-acoes">
+        <button type="button" class="botao botao-contorno" data-seu-cancelar hidden>Cancelar horário</button>
+        <button type="button" class="botao botao-texto" data-seu-novo>Marcar outro horário</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="js/regras.js"></script>
+  <script src="js/servidor.js"></script>
+  <script src="js/agenda.js"></script>
+</body>
+</html>

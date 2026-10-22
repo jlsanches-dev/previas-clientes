@@ -1,0 +1,29 @@
+/* Fontes hospedadas no próprio site (sem chamar o Google a cada visita).
+   Zilla Slab: letra com "pezinho" reto, parecida com o "FB BARBEARIA" do logo.
+   Hanken Grotesk: textos e botões (versão variável, pesos 400 a 700).
+   Licença SIL Open Font License 1.1 (uso livre), veja os arquivos OFL-*.txt.
+   Só o conjunto "latin", que já cobre todos os acentos do português. */
+
+@font-face {
+  font-family: "Zilla Slab";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(zilla-slab-600.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: "Zilla Slab";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(zilla-slab-700.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: "Hanken Grotesk";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(hanken-grotesk-var.woff2) format("woff2");
+}
